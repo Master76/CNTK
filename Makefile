@@ -1039,30 +1039,30 @@ endif
 endif
 
 ########################################
-# ImageWriter plugin
+# Extensions plugin
 ########################################
 
 ifdef OPENCV_PATH
-IMAGEWRITER_LIBS_LIST := opencv_core opencv_imgproc opencv_imgcodecs
-IMAGEWRITER_LIBS:= $(addprefix -l,$(IMAGEWRITER_LIBS_LIST))
+EXTENSIONS_LIBS_LIST := opencv_core opencv_imgproc opencv_imgcodecs
+EXTENSIONS_LIBS:= $(addprefix -l,$(EXTENSIONS_LIBS_LIST))
 
-IMAGEWRITER_SRC =\
-  $(SOURCEDIR)/ImageWriterDll/ImageWriter.cpp \
+EXTENSIONS_SRC =\
+  $(SOURCEDIR)/ExtensionsDll/ImageWriter.cpp \
 
-IMAGEWRITER_OBJ := $(patsubst %.cpp, $(OBJDIR)/%.o, $(IMAGEWRITER_SRC))
+EXTENSIONS_OBJ := $(patsubst %.cpp, $(OBJDIR)/%.o, $(EXTENSIONS_SRC))
 
-IMAGEWRITER:=$(LIBDIR)/Cntk.ImageWriter-$(CNTK_COMPONENT_VERSION).so
-ALL_LIBS += $(IMAGEWRITER)
-PYTHON_LIBS += $(IMAGEWRITER)
-JAVA_LOAD_DEPS += $(IMAGEWRITER_LIBS)
-SRC+=$(IMAGEWRITER_SRC)
+EXTENSIONS:=$(LIBDIR)/Cntk.Extensions-$(CNTK_COMPONENT_VERSION).so
+ALL_LIBS += $(EXTENSIONS)
+PYTHON_LIBS += $(EXTENSIONS)
+JAVA_LOAD_DEPS += $(EXTENSIONS_LIBS)
+SRC+=$(EXTENSIONS_SRC)
 
 INCLUDEPATH += $(OPENCV_PATH)/include
 LIBPATH += $(OPENCV_PATH)/lib $(OPENCV_PATH)/release/lib
 
-$(IMAGEWRITER): $(IMAGEWRITER_OBJ)
+$(EXTENSIONS): $(EXTENSIONS_OBJ)
 	@echo $(SEPARATOR)
-	$(CXX) $(LDFLAGS) -shared $(patsubst %,-L%, $(LIBDIR) $(LIBPATH)) $(patsubst %,$(RPATH)%, $(ORIGINDIR) $(LIBPATH)) -o $@ $^ $(IMAGEWRITER_LIBS)
+	$(CXX) $(LDFLAGS) -shared $(patsubst %,-L%, $(LIBDIR) $(LIBPATH)) $(patsubst %,$(RPATH)%, $(ORIGINDIR) $(LIBPATH)) -o $@ $^ $(EXTENSIONS_LIBS)
 endif
 
 ########################################
