@@ -8,6 +8,7 @@
 #ifdef USE_NCCL
 #include "GPUMatrix.h"
 #include <nccl.h>
+#include <nvml.h>
 #include <cuda_runtime.h>
 
 namespace Microsoft { namespace MSR { namespace CNTK {
@@ -53,6 +54,7 @@ NcclComm::NcclComm(int deviceId, const MPIWrapperPtr& mpi)
         }
         nvmlRes = nvmlDeviceGetUUID(thisDevice, thisDeviceUUID.data(), thisDeviceUUID.size());
         if (nvmlRes != NVML_SUCCESS)
+        {
             fprintf(stderr, "NcclComm: disabled, failed to obtain nvmlDevice UUID: %s\n", nvmlErrorString(nvmlRes));
             nvmlShutdown();
             return;
