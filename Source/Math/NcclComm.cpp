@@ -8,7 +8,7 @@
 #ifdef USE_NCCL
 #include "GPUMatrix.h"
 #include <nccl.h>
-#include <nvml.h>
+#include "nvml.h"
 #include <cuda_runtime.h>
 
 namespace Microsoft { namespace MSR { namespace CNTK {
