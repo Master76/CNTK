@@ -5,6 +5,7 @@
 
 #define _CRT_SECURE_NO_WARNINGS
 #include "LTNoRandomizer.h"
+#include <iostream>
 
 namespace CNTK {
 
@@ -35,6 +36,8 @@ void LTNoRandomizer::RefillSequenceWindow(SequenceWindow& window)
     window.m_dataChunks[m_prefetchedChunk.m_info.m_id] = m_prefetchedChunk.m_data;
 
     auto numberOfWorkers = Config().m_numberOfWorkers;
+    //std::cout << "LTNoRandomizer : Worker rank " << Config().m_workerRank << " NumWorkers " << Config().m_numberOfWorkers << std::endl;
+
     if (numberOfWorkers > 1)
     {
         // Decimate according to the position.

@@ -10,6 +10,7 @@
 #include "Utils.h"
 #include "fileutil.h"
 #include "PerformanceProfiler.h"
+#include <iostream>
 
 namespace CNTK
 {
@@ -153,6 +154,8 @@ namespace CNTK
                 m_workerRank = distributed->GetCommunicator()->CurrentWorker().m_globalRank;
                 m_numberOfWorkers = distributed->GetCommunicator()->Workers().size();
                 m_mbSizeScaleFactor = distributed->MinibatchSizeScaleFactor();
+
+                std::cout << "TrainingSession : Worker rank " << m_workerRank << " NumWorkers " << m_numberOfWorkers << std::endl;
             }
         }
 

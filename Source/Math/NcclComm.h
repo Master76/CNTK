@@ -13,7 +13,7 @@
 
 #include <vector>
 #include <type_traits>
-
+#undef USE_NCCL
 // Forward declare CUDA stuff
 typedef struct CUstream_st* cudaStream_t;
 typedef struct ncclComm* ncclComm_t;
